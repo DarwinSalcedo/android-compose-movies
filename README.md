@@ -8,7 +8,7 @@ First and going to create a traditional project with xml views and then and goin
 - create a scroll screen with movies.
 - Endpoint: the Most Popular Tv Shows.
   (https://developers.themoviedb.org/3/tv/get-popular-tv-shows)
-- The ítem has am image, title y and review average. 
+- The item has an image, title y and review average. 
 - The List must be able to hand pagination.
 2. Detail Screen
 - Separate view (other screen).
