@@ -9,12 +9,21 @@
         android:id="@+id/navigation_home"
         android:name="com.compose.movies.presentation.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/navigation_detail" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_detail"
         android:name="com.compose.movies.presentation.ui.detail.DetailFragment"
         android:label="@string/title_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="selectedProperty"
+            app:argType="com.compose.movies.domain.model.Show" />
+    </fragment>
 
 </navigation>

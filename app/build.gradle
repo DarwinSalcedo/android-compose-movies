@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -21,12 +22,14 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "API_KEY", "\"$api_key\""
+            buildConfigField "String", "API_KEY", "\"$api_key_stg\""
+            buildConfigField "String", "URL", "\"$base_url_stg\""
         }
 
 
         release {
-            buildConfigField 'String', "API_KEY", "\"$api_key\""
+            buildConfigField 'String', "API_KEY", "\"$api_key_prod\""
+            buildConfigField 'String', "URL", "\"$base_url_prod\""
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -76,4 +79,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:4.13.2"
+
 }

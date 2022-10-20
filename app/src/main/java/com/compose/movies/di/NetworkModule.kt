@@ -41,7 +41,7 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideAirportAndRoutesRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit = Retrofit.Builder()
-        .baseUrl("https://api.themoviedb.org/3/tv/")
+        .baseUrl(BuildConfig.URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .client(client)

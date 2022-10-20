@@ -1,7 +1,9 @@
 package com.compose.movies.presentation.ui.home
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.compose.movies.domain.ApiStatus
 import com.compose.movies.domain.model.Show
 import com.compose.movies.domain.network.Response
@@ -16,63 +18,59 @@ class HomeViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-
     private var bannerActive: Boolean = true
-
-    private var lastSearch = "-"
 
     private val _status = MutableLiveData<ApiStatus>()
 
     val status: LiveData<ApiStatus>
         get() = _status
 
-    private val _properties = MutableLiveData<List<Show>>()
+    private val _listData = MutableLiveData<List<Show>>()
 
-    val properties: LiveData<List<Show>>
-        get() = _properties
+    val listData: LiveData<List<Show>>
+        get() = _listData
 
-    private val _navigateToSelectedProperty = MutableLiveData<Show?>()
+    private val _navigateToDetail = MutableLiveData<Show?>()
 
-    val navigateToSelectedProperty: LiveData<Show?>
-        get() = _navigateToSelectedProperty
+    val navigateToDetail: LiveData<Show?>
+        get() = _navigateToDetail
 
 
     init {
         getListShows()
     }
 
-    fun getListShows(filter: String = "") {
-        if (lastSearch != filter) {
-            lastSearch = filter
-            viewModelScope.launch {
-                getListShowsUseCase(filter).collect {
-                    when (it) {
-                        is Response.Success -> {
-                            it.data.apply {
-                                _properties.postValue(this)
-                            }
-                            _status.value = ApiStatus.DONE
-                        }
-                        is Response.Error ->
-                            _status.value = ApiStatus.ERROR
-                        is Response.Loading -> _status.value = ApiStatus.LOADING
+    fun getListShows() {
+        viewModelScope.launch {
+            _status.value = ApiStatus.LOADING
+            getListShowsUseCase("").collect {
+                when (it) {
+                    is Response.Success -> {
+                        _listData.postValue(it.data)
+                        _status.value = ApiStatus.DONE
                     }
+                    is Response.Error -> _status.value = ApiStatus.ERROR
+
+                    is Response.Loading -> _status.value = ApiStatus.LOADING
                 }
             }
         }
     }
 
     fun displayPropertyDetails(value: Show) {
-        _navigateToSelectedProperty.value = value
+        _navigateToDetail.value = value
     }
 
 
     fun displayPropertyDetailsComplete() {
-        _navigateToSelectedProperty.value = null
+        _navigateToDetail.value = null
     }
 
     override fun onCleared() {
         super.onCleared()
         bannerActive = false
     }
+
+    fun search(filter: String) {}
+
 }

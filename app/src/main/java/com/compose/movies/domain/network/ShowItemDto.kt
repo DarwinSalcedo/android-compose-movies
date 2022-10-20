@@ -12,13 +12,14 @@ data class ShowDto(
 ) {
 
     data class ShowItemDto(
-        @Json(name = "backdrop_path") val backDropImage: String,
-        @Json(name = "poster_path") val posterPatch: String,
+        @Json(name = "backdrop_path") val backDropImage: String?,
+        @Json(name = "poster_path") val posterPatch: String?,
         @Json(name = "first_air_date") val firstAirDate: String,
         @Json(name = "name") val name: String,
         @Json(name = "original_name") val originalName: String,
         @Json(name = "overview") val overView: String,
-        @Json(name = "popularity") val popularity: String,
+        @Json(name = "popularity") val popularity: Double,
+        @Json(name = "vote_average") val voteAverage: Double,
     )
 
 }
@@ -45,4 +46,5 @@ data class ShowDto(
     "poster_path": "/59SVNwLfoMnZPPB6ukW6dlPxAdI.jpg",
     "vote_average": 7.9,
     "vote_count": 149
+    https://image.tmdb.org/t/p/w400/ajztm40qDPqMONaSJhQ2PaNe2Xd.jpg
 },*/
