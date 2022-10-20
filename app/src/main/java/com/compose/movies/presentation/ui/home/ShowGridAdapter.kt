@@ -18,7 +18,7 @@ class ShowGridAdapter(val onClickListener: OnClickListener) :
         fun bind(show: Show) {
             binding.title.text = show.name
             binding.reviewAverage.text = show.voteAverage.toString()
-            binding.image.loadUrl("https://image.tmdb.org/t/p/w400/${show.posterPath}")
+            binding.image.loadUrl(show.posterPath)
         }
     }
 

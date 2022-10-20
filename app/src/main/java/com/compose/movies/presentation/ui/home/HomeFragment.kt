@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.compose.movies.R
 import com.compose.movies.databinding.FragmentHomeBinding
 import com.compose.movies.domain.ApiStatus
+import com.compose.movies.framework.AppConstants.DATA_PARAM
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -81,7 +82,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner) {
             it?.let {
-                findNavController().navigate(R.id.action_showDetail, Bundle())
+
+                findNavController().navigate(R.id.action_showDetail, Bundle().apply {
+                    putParcelable(DATA_PARAM, it)
+                })
                 viewModel.displayPropertyDetailsComplete()
             }
         }
