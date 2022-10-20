@@ -18,8 +18,6 @@ class HomeViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private var bannerActive: Boolean = true
-
     private val _status = MutableLiveData<ApiStatus>()
 
     val status: LiveData<ApiStatus>
@@ -43,7 +41,7 @@ class HomeViewModel @Inject constructor(
     fun getListShows() {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            getListShowsUseCase("").collect {
+            getListShowsUseCase().collect {
                 when (it) {
                     is Response.Success -> {
                         _listData.postValue(it.data)
@@ -64,11 +62,6 @@ class HomeViewModel @Inject constructor(
 
     fun displayPropertyDetailsComplete() {
         _navigateToDetail.value = null
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        bannerActive = false
     }
 
     fun search(filter: String) {}

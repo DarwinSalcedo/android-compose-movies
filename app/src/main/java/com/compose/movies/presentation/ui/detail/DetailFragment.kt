@@ -1,7 +1,6 @@
 package com.compose.movies.presentation.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,8 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val data = arguments?.getParcelable<Show>(DATA_PARAM) ?: throw IllegalArgumentException("$context (DATA) must be not null.")
+        val data = arguments?.getParcelable<Show>(DATA_PARAM)
+            ?: throw IllegalArgumentException("$context (DATA) must be not null.")
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         binding.apply {
             mainPhotoImage.loadUrl(data.posterPath)

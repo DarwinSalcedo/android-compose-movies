@@ -24,7 +24,7 @@ class TvShowsRepositoryImpl @Inject constructor(
             apiService.getListShows(BuildConfig.API_KEY, LANGUAGE, currentPage.toString())
         currentPage++
         cache.addAll(newResult.results.map {
-            Show(it.name, it.overView, it.voteAverage, it.posterPatch ?: "")
+            Show(it.id,it.name, it.overView, it.voteAverage, it.posterPatch ?: "")
         })
         emit(Response.Success(cache))
 
