@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface TvShowsRepository {
 
-    fun getList(countryCode: String): Flow<Response<List<Show>>>
+    suspend fun getList(): Flow<Response<List<Show>>>
 
 }

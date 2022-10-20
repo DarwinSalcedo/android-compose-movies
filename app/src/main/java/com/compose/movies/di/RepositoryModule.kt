@@ -1,6 +1,7 @@
 package com.compose.movies.di
 
 
+import com.compose.movies.domain.network.ApiService
 import com.compose.movies.domain.repositories.TvShowsRepository
 import com.compose.movies.domain.repositories.TvShowsRepositoryImpl
 import dagger.Module
@@ -16,8 +17,9 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideTvShowsRepository(
+        apiService: ApiService
     ): TvShowsRepository {
-        return TvShowsRepositoryImpl()
+        return TvShowsRepositoryImpl(apiService)
     }
 
 }
