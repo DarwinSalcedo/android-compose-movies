@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.compose.movies.R
 import com.compose.movies.databinding.FragmentHomeBinding
 import com.compose.movies.domain.ApiStatus
+import com.compose.movies.framework.AppConstants.DATA_PARAM
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -45,17 +46,16 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             }
         })
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun setObservers() {
-
         binding.svSearch.setOnQueryTextListener(this)
 
         adapter = ShowGridAdapter(ShowGridAdapter.OnClickListener {
             viewModel.displayPropertyDetails(it)
         })
         binding.moviesRecyclerView.adapter = adapter
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setObservers() {
 
         viewModel.listData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -81,7 +81,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner) {
             it?.let {
-                findNavController().navigate(R.id.action_showDetail, Bundle())
+
+                findNavController().navigate(R.id.action_showDetail, Bundle().apply {
+                    putParcelable(DATA_PARAM, it)
+                })
                 viewModel.displayPropertyDetailsComplete()
             }
         }

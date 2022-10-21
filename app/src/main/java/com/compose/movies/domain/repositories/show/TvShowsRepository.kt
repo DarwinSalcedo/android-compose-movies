@@ -1,4 +1,4 @@
-package com.compose.movies.domain.repositories
+package com.compose.movies.domain.repositories.show
 
 import com.compose.movies.domain.model.Show
 import com.compose.movies.domain.network.Response

@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Show(
+    val id: Int,
     val name: String,
     val overview: String,
     val voteAverage: Double,

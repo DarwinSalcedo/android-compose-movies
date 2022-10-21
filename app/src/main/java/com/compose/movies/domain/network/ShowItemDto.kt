@@ -12,6 +12,7 @@ data class ShowDto(
 ) {
 
     data class ShowItemDto(
+        @Json(name = "id") val id: Int,
         @Json(name = "backdrop_path") val backDropImage: String?,
         @Json(name = "poster_path") val posterPatch: String?,
         @Json(name = "first_air_date") val firstAirDate: String,

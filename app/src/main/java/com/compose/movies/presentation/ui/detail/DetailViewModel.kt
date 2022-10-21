@@ -1,4 +1,4 @@
-package com.compose.movies.presentation.ui.home
+package com.compose.movies.presentation.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.compose.movies.domain.ApiStatus
 import com.compose.movies.domain.model.Show
 import com.compose.movies.domain.network.Response
-import com.compose.movies.usecase.GetListShows
+import com.compose.movies.usecase.GetSuggestedShows
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val getListShowsUseCase: GetListShows,
+class DetailViewModel @Inject constructor(
+    private val getSuggestedShows: GetSuggestedShows,
 ) :
     ViewModel() {
 
@@ -28,20 +28,17 @@ class HomeViewModel @Inject constructor(
     val listData: LiveData<List<Show>>
         get() = _listData
 
-    private val _navigateToDetail = MutableLiveData<Show?>()
+    var show : Show? = null
 
-    val navigateToDetail: LiveData<Show?>
-        get() = _navigateToDetail
-
-
-    init {
-        getListShows()
+    fun start(value : Show){
+        show = value
+        geListSuggestedShows(value.id)
     }
 
-    fun getListShows() {
+    private fun geListSuggestedShows(id: Int) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            getListShowsUseCase().collect {
+            getSuggestedShows(id).collect {
                 when (it) {
                     is Response.Success -> {
                         _listData.postValue(it.data)
@@ -54,16 +51,5 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
-    fun displayPropertyDetails(value: Show) {
-        _navigateToDetail.value = value
-    }
-
-
-    fun displayPropertyDetailsComplete() {
-        _navigateToDetail.value = null
-    }
-
-    fun search(filter: String) {}
 
 }
