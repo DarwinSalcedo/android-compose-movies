@@ -46,17 +46,16 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             }
         })
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun setObservers() {
-
         binding.svSearch.setOnQueryTextListener(this)
 
         adapter = ShowGridAdapter(ShowGridAdapter.OnClickListener {
             viewModel.displayPropertyDetails(it)
         })
         binding.moviesRecyclerView.adapter = adapter
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setObservers() {
 
         viewModel.listData.observe(viewLifecycleOwner) {
             adapter.submitList(it)

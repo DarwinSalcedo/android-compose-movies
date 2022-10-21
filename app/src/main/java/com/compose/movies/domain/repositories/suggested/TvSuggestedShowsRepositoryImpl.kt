@@ -1,4 +1,4 @@
-package com.compose.movies.domain.repositories
+package com.compose.movies.domain.repositories.suggested
 
 import com.compose.movies.BuildConfig
 import com.compose.movies.domain.model.Show
@@ -10,21 +10,22 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class TvShowsRepositoryImpl @Inject constructor(
+class TvSuggestedShowsRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
-) : TvShowsRepository {
-
-    private var currentPage = 1
-    private var cache = mutableListOf<Show>()
+) : TvSuggestedShowsRepository {
 
 
-    override suspend fun getList(): Flow<Response<List<Show>>> = flow {
+
+    override suspend fun getSuggestedList(tvId: Int): Flow<Response<List<Show>>> = flow {
         emit(Response.Loading)
         val newResult =
-            apiService.getListShows(BuildConfig.API_KEY, LANGUAGE, currentPage.toString())
-        currentPage++
+            apiService.getSuggestedListShows(tvId.toString(),
+                BuildConfig.API_KEY,
+                LANGUAGE,
+                "1")
+        val cache = mutableListOf<Show>()
         cache.addAll(newResult.results.map {
-            Show(it.id,it.name, it.overView, it.voteAverage, it.posterPatch ?: "")
+            Show(it.id, it.name, it.overView, it.voteAverage, it.posterPatch ?: "")
         })
         emit(Response.Success(cache))
 
