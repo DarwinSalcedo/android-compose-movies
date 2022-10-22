@@ -1,5 +1,6 @@
 package com.compose.movies.presentation.ui.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.ScrollView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.compose.movies.R
 import com.compose.movies.databinding.FragmentDetailBinding
 import com.compose.movies.domain.ApiStatus
 import com.compose.movies.domain.model.Show
@@ -37,6 +39,7 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setObservers() {
         viewModel.listData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -62,7 +65,7 @@ class DetailFragment : Fragment() {
         binding.apply {
             mainPhotoImage.loadUrl(data.posterPath)
             name.text = data.name
-            overview.text = data.overview
+            overview.text = data.overview.ifEmpty { getString(R.string.not_description) }
             review.text = data.voteAverage.toString()
         }
     }
