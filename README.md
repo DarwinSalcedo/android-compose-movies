@@ -17,3 +17,8 @@ First and going to create a traditional project with xml views and then and goin
 - The user could be able to navigate to suggested shows. There is located at the bottom on the screen in a recyclerview.
 - Similar shows endpoint:
   (https://developers.themoviedb.org/3/tv/get-similar-tv-shows)
+  
+You must write a api_key_movie on gradel.properties to run this project. 
+
+
+![untitled](https://user-images.githubusercontent.com/9206032/197360584-d9e057b0-ae41-4a46-96ef-9e54eacade62.gif)
