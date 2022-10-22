@@ -18,7 +18,8 @@ First and going to create a traditional project with xml views and then and goin
 - Similar shows endpoint:
   (https://developers.themoviedb.org/3/tv/get-similar-tv-shows)
   
-You must write a api_key_movie on gradel.properties to run this project. 
+You must write a api_key_movie on gradle.properties to run this project. 
 
 
-![untitled](https://user-images.githubusercontent.com/9206032/197360584-d9e057b0-ae41-4a46-96ef-9e54eacade62.gif)
+![movies](https://user-images.githubusercontent.com/9206032/197361367-387eab86-0e90-45f4-bb09-c934764f62f5.gif)
+
