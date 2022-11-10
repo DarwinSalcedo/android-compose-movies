@@ -5,17 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.compose.movies.R
 import com.compose.movies.presentation.ui.ui.theme.MovieItems
 import com.compose.movies.presentation.ui.ui.theme.MoviesTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
+@ExperimentalMaterial3Api
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -34,7 +36,11 @@ class HomeFragment : Fragment() {
                     // A surface container using the 'background' color from the theme
                     Surface(modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background) {
-                        MovieItems()
+                        Scaffold(topBar = {
+                            SmallTopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) })
+                        }) {
+                            MovieItems()
+                        }
                     }
                 }
             }
