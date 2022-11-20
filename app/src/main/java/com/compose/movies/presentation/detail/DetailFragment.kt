@@ -1,4 +1,4 @@
-package com.compose.movies.presentation.ui.detail
+package com.compose.movies.presentation.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.compose.movies.domain.ApiStatus
 import com.compose.movies.domain.model.Show
 import com.compose.movies.framework.AppConstants.DATA_PARAM
 import com.compose.movies.framework.loadUrl
-import com.compose.movies.presentation.ui.home.ShowGridAdapter
+import com.compose.movies.presentation.home.ShowGridAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

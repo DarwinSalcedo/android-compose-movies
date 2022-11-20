@@ -1,4 +1,4 @@
-package com.compose.movies.presentation.ui.home
+package com.compose.movies.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

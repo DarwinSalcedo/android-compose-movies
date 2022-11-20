@@ -1,4 +1,4 @@
-package com.compose.movies.presentation.ui.home
+package com.compose.movies.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
